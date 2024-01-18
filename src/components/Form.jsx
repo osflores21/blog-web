@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { btnBack } from '@/app/lib/utils';
 
 const BlogEntryForm = ({ formValues, onSubmitForm }) => {
-  const router = useRouter();
+  const route = useRouter();
   const [title, setTitle] = useState('');
   const [autor, setAutor] = useState('');
   const [content, setContent] = useState('');
@@ -14,10 +15,6 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
       setContent(formValues[0]?.content || '');
     }
   }, [formValues]);
-
-  const btnBack = () => {
-    router.push('/');
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +65,7 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
       </div>
       <div className="flex items-center justify-center">
         <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Post</button>
-        <button type="button" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-4" onClick={btnBack}>
+        <button type="button" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-4"  onClick={() => btnBack(route)}>
           Cancel
         </button>
       </div>

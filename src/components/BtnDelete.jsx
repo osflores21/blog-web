@@ -1,19 +1,17 @@
 "use client";
 import React from 'react'
-//Swal
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-// router Next
 import { useRouter } from 'next/navigation';
+import { deleteEntrie } from '@/app/lib/services';
+
 
 const BtnDelete = ({ id }) => {
 
   const MySwal = withReactContent(Swal)
-  const router = useRouter();
+  const route = useRouter();
 
-  const deleteEntrie = () => {
-    const URI = "https://blogapi-production-9469.up.railway.app/api/";
-
+  const showMessage = () => {
     MySwal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -24,12 +22,10 @@ const BtnDelete = ({ id }) => {
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await fetch(`${URI}/${id}`, {
-          method: 'DELETE'
-        })
+        const response = await deleteEntrie(id)
         if (response.ok) {
           console.log("ok")
-          router.refresh()
+          route.refresh()
         }
         Swal.fire({
           title: "Deleted!",
@@ -43,7 +39,7 @@ const BtnDelete = ({ id }) => {
   return (
     <div>
       <button
-        onClick={deleteEntrie}
+        onClick={showMessage}
         className="bg-red-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-red hover:bg-red-600"
       >
         Delete

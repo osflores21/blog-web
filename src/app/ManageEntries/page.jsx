@@ -1,39 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import BtnDelete from '@/components/BtnDelete';
+import { subStringText } from '../lib/utils';
+import StyledLink from '@/components/StyledLink';
+import { getData } from '../lib/services';
 
-const getData = async () => {
-  try {
-    const response = await fetch(process.env.URI, { cache: 'no-store' });
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-};
-
-const subStringText = (text, cant = 70) => {
-  let first70 = text.substring(0, cant);
-  if (text.length > 70) {
-    first70 += "...";
-  }
-  return first70
-}
-
-const StyledLink = ({ children, href }) => {
-  return (
-    <div className="text-blue-500 cursor-pointer hover:underline  flex justify-end pb-2">
-      <Link href={href} passHref>
-        {children}
-      </Link>
-    </div>
-  );
-};
 
 const ManageEntries = async () => {
   const data = await getData();
@@ -76,7 +47,6 @@ const ManageEntries = async () => {
                     <Link key={item.id} href={`/Edit/${item.id}`}>
                       Edit
                     </Link>
-
                   </div>
                   <div className='px-2'>
                     <BtnDelete id={item.id} />
