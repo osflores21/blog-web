@@ -61,14 +61,14 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
         <textarea
           id="content"
           className="border border-slate-500 px-4 py-2 w-full h-20 resize-none text-gray-700 rounded-md focus:outline-none focus:border-blue-500"
-          placeholder="Enter content (max 300 characters)"
+          placeholder="Enter content (max 1000 characters)"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          maxLength={300}
+          maxLength={1000}
         />
       </div>
       <div className="flex items-center justify-center">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save</button>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Post</button>
         <button type="button" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-4" onClick={btnBack}>
           Cancel
         </button>

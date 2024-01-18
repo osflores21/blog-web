@@ -1,9 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 
+const URI='https://blogapi-production-9469.up.railway.app/api/';
+
 const getData = async () => {
   try {
-    const response = await fetch(process.env.URI, { cache: 'no-store' });
+    const response = await fetch(URI, { cache: 'no-store' });
     if (response.ok) {
       const data = await response.json();
       return data;
