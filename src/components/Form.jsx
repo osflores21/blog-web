@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -27,8 +26,8 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-gray-300 p-4 rounded-md shadow-md max-w-lg mx-auto mt-8">
-      <div className="mb-4">
+    <form onSubmit={handleSubmit} className="bg-white border border-gray-300 p-4 rounded-md shadow-md max-w-3xl mx-auto mt-8">
+      <div className="mb-4 ">
         <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
           Title
         </label>
@@ -74,7 +73,6 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
         </button>
       </div>
     </form>
-
   );
 };
 

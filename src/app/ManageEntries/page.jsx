@@ -25,12 +25,22 @@ const subStringText = (text, cant = 70) => {
   return first70
 }
 
+const StyledLink = ({ children, href }) => {
+  return (
+    <div className="text-blue-500 cursor-pointer hover:underline  flex justify-end pb-2">
+      <Link href={href} passHref>
+        {children}
+      </Link>
+    </div>
+  );
+};
 
 const ManageEntries = async () => {
   const data = await getData();
 
   return (
     <div className='flex flex-col bg-white border border-gray-300 p-4 rounded-md shadow-md  mx-auto mt-8 '>
+      <StyledLink href="/">Back</StyledLink>
       <table className='min-w-full divide-y divide-gray-200'>
         <thead className='bg-gray-50'>
           <tr>
