@@ -1,11 +1,12 @@
-import Image from 'next/image'
-import ShowEntries from '@/components/ShowEntries'
-
+import React from 'react'
+import ShowPost from '@/components/ShowPost'
 export default function Home() {
   return (
     <section>
       <div className='flex justify-center items-center'>
-      <ShowEntries/>
+        <div className='w-full max-w-screen-lg'>
+          <ShowPost />
+        </div>
       </div>
     </section>
   )
