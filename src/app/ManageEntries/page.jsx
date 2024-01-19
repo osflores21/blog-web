@@ -4,13 +4,11 @@ import BtnDelete from '@/components/BtnDelete';
 import { subStringText } from '../lib/utils';
 import StyledLink from '@/components/StyledLink';
 import { getData } from '../lib/services';
-
 const ManageEntries = async () => {
   const data = await getData();
-
   return (
     <div className='flex flex-col bg-smalt-50 border border-smalt-400 p-4 rounded-md shadow-md min-w-96 mx-auto mt-8 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5'>
-      <StyledLink href="/">Back</StyledLink>
+      <StyledLink href="/" >Back</StyledLink>
       <div className='overflow-x-auto'>
         <table className='min-w-full divide-y divide-smalt-200'>
           <thead className='bg-smalt-50'>

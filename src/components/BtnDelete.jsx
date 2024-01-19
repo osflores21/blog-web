@@ -9,7 +9,7 @@ import { deleteEntrie } from '@/app/lib/services';
 const BtnDelete = ({ id }) => {
 
   const MySwal = withReactContent(Swal)
-  const route = useRouter();
+  const router = useRouter();
 
   const showMessage = () => {
     MySwal.fire({
@@ -24,7 +24,7 @@ const BtnDelete = ({ id }) => {
       if (result.isConfirmed) {
         const response = await deleteEntrie(id)
         if (response.ok) {
-          route.refresh()
+          router.refresh()
         }
         Swal.fire({
           title: "Deleted!",

@@ -17,7 +17,6 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
   }, [formValues]);
 
   const handleSubmit = (e) => {
-    console.log("hola")
     e.preventDefault();
     const formData = { title, autor, content };
     onSubmitForm(formData);

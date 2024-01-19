@@ -1,8 +1,11 @@
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
+import useOnlineStatus from '@/app/lib/hooks/useOnlineStatus';
 const NavBar = () => {
+  const isOnline = useOnlineStatus()
+  console.log(isOnline)
   return (
     <nav className="bg-gradient-to-t from-smalt-100 to-smalt-50 p-4 border-b border-gray-400 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
@@ -20,9 +23,15 @@ const NavBar = () => {
           <h1 className="mb-2 text-balance font-bold leading-tight text-2xl text-black"> Blog</h1>
         </div>
         <div className="flex space-x-4">
-          <div className="px-4 py-2 rounded border border-smalt-700 bg-white hover:bg-smalt-50 hover:border-smalt-700 hover:text-smalt-700 hover:shadow-md text-sm text-balance text-smalt-700 font-normal">
-            <Link href="/Create">New post</Link>
-          </div>
+          {isOnline ? (
+            <div className="px-4 py-2 rounded border border-smalt-700 bg-white hover:bg-smalt-50 hover:border-smalt-700 hover:text-smalt-700 hover:shadow-md text-sm text-balance text-smalt-700 font-normal">
+              <Link href="/Create">New post</Link>
+            </div>
+          ) : (
+            <div className="px-4 py-2 rounded border border-gray-300 bg-gray-200 text-sm text-gray-500 font-normal cursor-not-allowed" title="No internet connection">
+              New post
+            </div>
+          )}
           <div className="px-4 py-2 rounded border border-smalt-700 bg-white hover:bg-smalt-50 hover:border-smalt-700 hover:text-smalt-700 hover:shadow-md text-sm text-balance text-smalt-700 font-normal">
             <Link href="/ManageEntries">Manage</Link>
           </div>

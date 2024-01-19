@@ -38,3 +38,6 @@ export const sliceDate = (date) => {
 export const btnBack = (route) => {
     route.back();
 };
+
+
+
