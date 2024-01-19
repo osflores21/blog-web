@@ -24,7 +24,6 @@ const BtnDelete = ({ id }) => {
       if (result.isConfirmed) {
         const response = await deleteEntrie(id)
         if (response.ok) {
-          console.log("ok")
           route.refresh()
         }
         Swal.fire({

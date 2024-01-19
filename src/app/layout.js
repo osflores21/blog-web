@@ -5,7 +5,7 @@ import NavBar from '@/components/NavBar'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'SPS-BLOG',
+  title: 'P4B-BLOG',
   description: 'This a blog',
 }
 
