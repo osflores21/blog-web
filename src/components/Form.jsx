@@ -17,20 +17,28 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
   }, [formValues]);
 
   const handleSubmit = (e) => {
+    console.log("hola")
     e.preventDefault();
     const formData = { title, autor, content };
     onSubmitForm(formData);
   };
 
+  const handleInputChange = (e) => {
+    setContent(e.target.value);
+    // Ajustar la altura del textarea automáticamente
+    e.target.style.height = 'auto';
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-gray-300 p-4 rounded-md shadow-md max-w-3xl mx-auto mt-8">
+    <form onSubmit={handleSubmit} className="bg-smalt-50 border border-smalt-400 p-4 rounded-md shadow-md max-w-3xl mx-auto mt-8">
       <div className="mb-4 ">
-        <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="title" className="block text-black font-bold mb-2">
           Title
         </label>
         <input
           id="title"
-          className="border border-slate-500 px-4 py-2 w-full text-gray-700 rounded-md focus:outline-none focus:border-blue-500"
+          className="border border-smalt-400 px-4 py-2 w-full text-black rounded-md focus:outline-none focus:border-smalt-700"
           type="text"
           placeholder="Enter title"
           value={title}
@@ -38,12 +46,12 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="autor" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="autor" className="block text-black font-bold mb-2">
           Author
         </label>
         <input
           id="autor"
-          className="border border-slate-500 px-4 py-2 w-full text-gray-700 rounded-md focus:outline-none focus:border-blue-500"
+          className="border border-smalt-400 px-4 py-2 w-full text-black rounded-md focus:outline-none focus:border-smalt-700"
           type="text"
           placeholder="Enter author"
           value={autor}
@@ -51,21 +59,28 @@ const BlogEntryForm = ({ formValues, onSubmitForm }) => {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="content" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="content" className="block text-black font-bold mb-2">
           Content
         </label>
         <textarea
           id="content"
-          className="border border-slate-500 px-4 py-2 w-full h-20 resize-none text-gray-700 rounded-md focus:outline-none focus:border-blue-500"
+          className="border border-smalt-400 px-4 py-2 w-full text-black rounded-md focus:outline-none focus:border-smalt-700"
           placeholder="Enter content (max 1000 characters)"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={handleInputChange}
           maxLength={1000}
+          style={{ minHeight: '100px' }} // Altura mínima inicial
         />
       </div>
       <div className="flex items-center justify-center">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Post</button>
-        <button type="button" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-4"  onClick={() => btnBack(route)}>
+        <button type="submit"
+          className="inline-block rounded border-2 border-smalt-400 text-smalt-700 hover:border-smalt-700 hover:bg-smalt-600 hover:bg-opacity-10 hover:smalt-800 focus:border-smalt-700 focus:text-smalt-700 active:border-smalt-800 active:text-smalt-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0 mr-4">
+          Post
+        </button>
+
+        <button type="button"
+          onClick={() => btnBack(route)}
+          className="inline-block rounded border-2 border-red-400 text-red-600 hover:border-red-600 hover:bg-red-600 hover:bg-opacity-10 hover:text-red-800 focus:border-red-700 focus:text-red-700 active:border-red-800 active:text-red-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">
           Cancel
         </button>
       </div>

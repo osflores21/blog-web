@@ -1,51 +1,69 @@
-
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { subStringText } from '@/app/lib/utils';
-import { getData } from '@/app/lib/services';
+import useDataFetchingByFilter from '@/app/lib/hooks/useDataFetchingByFilter';
 
+const ShowPost = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const { data, isLoading } = useDataFetchingByFilter(searchTerm);
 
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
 
-const ShowPost = async () => {
-  const data = await getData();
 
   return (
-    <div>
-      <div className='mb-4 flex justify-between items-center'>
+    <div className='mb-4 mt-4 min-w-96'>
+      <div className='mb-4 mt-4 flex justify-center items-center'>
         <input
-          className="border border-slate-500 px-4 py-2 w-full text-gray-700 rounded-md focus:outline-none focus:border-blue-500"
+          className="border border-smalt-400 px-4 py-2 lg:w-4/6 text-black rounded-md focus:outline-none focus:border-smalt-800"
           type="text"
-          placeholder="search by title, author or content"
-        /*  value={searchTerm}
-         onChange={(e) => setSearchTerm(e.target.value)} */
+          placeholder="Search by title, author or content"
+          onChange={(e) => handleSearch(e.target.value)}
         />
-        <button
-          type='button'
-          className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2'
-       /*    onClick={() => handleSearch()} */
-        >
-          Search
-        </button>
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4  w-full'>
-
-
-        {data.map((item, index) => (
-          <div key={index} className='bg-white border border-gray-300 p-4 rounded-md shadow-md'>
-            <p className='text-gray-600 text-xl font-bold mb-2'>{item.title}</p>
-            <p className='text-gray-600 mb-2'>{item.autor}</p>
-            <p className='text-gray-700 break-words'>{subStringText(item.content)}</p>
-            <div className='flex mt-4 space-x-2 justify-end'>
-              <div className="bg-blue-500 text-white px-4 py-2 rounded  hover:bg-blue-600">
-                <Link key={item.id} href={`/ShowDetail/${item.id}`}>
-                  Read more
-                </Link>
-              </div>
+      {isLoading
+        ? (
+          <p className='text-black text-xl font-bold text-center'>Loading...</p>
+        ) : (
+          <div className='mb-4 mt-4 flex justify-center items-center min-w-96'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4 w-4/6 min-w-min'>
+              {data.length === 0 ? (
+                <div className='col-start-2'>
+                  <p className='text-black text-xl font-bold  text-center'>There are no publications</p>
+                </div>
+              ) : (
+                data.map((item, index) => (
+                  <div key={index} className=' bg-smalt-50 border border-smalt-400 rounded-3xl text-left h-max'>
+                    <h5
+                      className="border-b-2 border-smalt-400 px-3 py-3 text-xl font-medium leading-tight  text-black">
+                      {item.title}
+                    </h5>
+                    <div className='p-3'>
+                      <h6 className="mb-2 text-balance font-medium leading-tight  text-black">
+                        {item.autor}
+                      </h6>
+                      <p className="mb-4 text-base  text-black">
+                        {subStringText(item.content)}
+                      </p>
+                      <div className='flex mt-4 space-x-2 justify-end'>
+                        <div className="px-4 py-2 rounded border border-smalt-700 bg-white hover:bg-smalt-50 hover:border-smalt-700 hover:text-smalt-700 hover:shadow-md text-sm text-balance text-smalt-700 font-normal">
+                          <Link href={`/ShowDetail/${item.id}`}>
+                            Read more
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
-        ))}
-      </div>
+
+        )}
     </div>
   );
 };
+
 export default ShowPost;

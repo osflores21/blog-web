@@ -15,6 +15,27 @@ export const getData = async () => {
       throw error;
     }
   };
+  
+  export const getDataByFilter = async (search) => {
+    try {
+      let apiURL = '';
+      if (search) {
+        apiURL = URI + `${encodeURIComponent(search)}`;
+      }
+      
+      const response = await fetch(apiURL);
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
 
   export const getEntrieById = async (id) => {
     try {
